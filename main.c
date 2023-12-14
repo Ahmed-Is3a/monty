@@ -10,32 +10,30 @@ stack_t *head = NULL;
 
 int main(int argc, char *argv[])
 {
+	char *file_name;
+	FILE *fd;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	open_file(argv[1]);
+	/* open file*/
+	file_name = argv[1];
+	fd = fopen(file_name, "r");
+
+	if (file_name == NULL || fd == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", file_name);
+		free_stack();
+		exit(EXIT_FAILURE);
+	}
+
+	read_file(fd);
+	fclose(fd);
+
 	free_stack();
 	return (0);
-}
-
-/**
- * create_stack - Creates a node.
- * @n: Number to go inside the node.
- * Return: Upon sucess a pointer to the node. Otherwise NULL.
- */
-stack_t *create_stack(int n)
-{
-	stack_t *node;
-
-	node = malloc(sizeof(stack_t));
-	if (node == NULL)
-		errors_1(4);
-	node->next = NULL;
-	node->prev = NULL;
-	node->n = n;
-	return (node);
 }
 
 /**
@@ -57,27 +55,30 @@ void free_stack(void)
 }
 
 /**
- * add_to_queue - Adds a node to the queue.
- * @new_node: Pointer to the new node.
- * @line: line number of the opcode.
+ * read_file - reads a file
+ * @fd: pointer to file descriptor
+ * Return: void
  */
-void add_to_queue(stack_t **new_node, unsigned int line)
+
+void read_file(FILE *fd)
 {
-	stack_t *tmp;
+	int line_num;
+	char *opcode, *value, *buffer = NULL;
+	size_t len = 0;
 
-	(void)line;
-
-	if (new_node == NULL || *new_node == NULL)
-		exit(EXIT_FAILURE);
-	if (head == NULL)
+	for (line_num = 1; getline(&buffer, &len, fd) != -1; line_num++)
 	{
-		head = *new_node;
-		return;
-	}
-	tmp = head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
+		if (buffer == NULL)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			free_stack();
+			exit(EXIT_FAILURE);
+		}
 
-	tmp->next = *new_node;
-	(*new_node)->prev = tmp;
+		opcode = strtok(buffer, "\n ");
+		value = strtok(NULL, "\n ");
+
+		find_func(opcode, value, line_num);
+	}
+	free(buffer);
 }

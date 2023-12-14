@@ -1,16 +1,20 @@
 #include "main.h"
 
 /**
- * pop_top - Adds a node to the stack.
+ * pop -  removes the top element of the stack.
  * @stack: Pointer to a pointer pointing to top node of the stack.
- * @line_number: Interger representing the line number of of the opcode.
+ * @line_number: line number of the opcode.
  */
-void pop_top(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
-	if (stack == NULL || *stack == NULL)
-		errors_2(7, line_number);
+	if (stack == NULL || *stack == NULL) /* if empty*/
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		free_stack();
+		exit(EXIT_FAILURE);
+	}
 
 	tmp = *stack;
 	*stack = tmp->next;

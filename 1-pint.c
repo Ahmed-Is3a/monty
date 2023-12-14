@@ -1,13 +1,17 @@
 #include "main.h"
 
 /**
- * print_top - Prints the top node of the stack.
- * @stack: Pointer to a pointer pointing to top node of the stack.
- * @line_number: Interger representing the line number of of the opcode.
+ * pint - Prints the top node of the stack.
+ * @stack: Pointer to a pointer pointing to top of the stack.
+ * @line_number: line number of the opcode.
  */
-void print_top(stack_t **stack, unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
-		errors_2(6, line_number);
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free_stack();
+		exit(EXIT_FAILURE);
+	}
 	printf("%d\n", (*stack)->n);
 }

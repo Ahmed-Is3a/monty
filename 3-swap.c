@@ -1,16 +1,22 @@
 #include "main.h"
 
 /**
- * swap_nodes - Swaps the top two elements of the stack.
+ * swap - Swaps the top two elements of the stack.
+ *
  * @stack: Pointer to a pointer pointing to top node of the stack.
- * @line_number: Interger representing the line number of of the opcode.
+ * @line_number: line number.
  */
-void swap_nodes(stack_t **stack, unsigned int line_number)
+void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-		errors_2(8, line_number, "swap");
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		free_stack();
+		exit(EXIT_FAILURE);
+	}
+
 	tmp = (*stack)->next;
 	(*stack)->next = tmp->next;
 	if (tmp->next != NULL)

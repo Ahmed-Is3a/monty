@@ -3,10 +3,10 @@
 
 #define _GNU_SOURCE
 #include <stdio.h>
-#include <unistd.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include <stdarg.h>
 
 /**
@@ -42,43 +42,24 @@ typedef struct instruction_s
 extern stack_t *head;
 typedef void (*op_func)(stack_t **, unsigned int);
 
-/*file operations*/
 void open_file(char *file_name);
 int parse_line(char *buffer, int line_number, int format);
 void read_file(FILE *);
-int len_chars(FILE *);
-void find_opcode_func(char *, char *, int, int);
+void find_func(char *, char *, int);
 
-/*Stack operations*/
-stack_t *create_stack(int n);
+stack_t *add_to_stack(int n);
 void free_stack(void);
-void pall(stack_t **, unsigned int);
 void push(stack_t **, unsigned int);
-void add_to_queue(stack_t **, unsigned int);
-
-void call_fun(op_func, char *, char *, int, int);
-
-void print_top(stack_t **, unsigned int);
-void pop_top(stack_t **, unsigned int);
+void pall(stack_t **, unsigned int);
+void pint(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
 void nop(stack_t **, unsigned int);
-void swap_nodes(stack_t **, unsigned int);
+void pop(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
 
-/*Math operations with nodes*/
-void add_nodes(stack_t **, unsigned int);
-void sub_nodes(stack_t **, unsigned int);
-void div_nodes(stack_t **, unsigned int);
-void mul_nodes(stack_t **, unsigned int);
-void mod_nodes(stack_t **, unsigned int);
-
-/*String operations*/
-void print_char(stack_t **, unsigned int);
-void print_str(stack_t **, unsigned int);
-void rotl(stack_t **, unsigned int);
+void call_func(op_func, char *, char *, int);
 
 /*Error hanlding*/
-void errors_1(int error_code, ...);
-void errors_2(int error_code, ...);
-void errors_3(int error_code, ...);
-void rotr(stack_t **, unsigned int);
+void handle_errors(int error_code, ...);
 
 #endif
