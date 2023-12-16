@@ -19,7 +19,7 @@
 */
 void divide(stack_t **stack, unsigned int line_num)
 {
-	int sum;
+	int result;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
@@ -36,8 +36,8 @@ void divide(stack_t **stack, unsigned int line_num)
 	}
 
 	(*stack) = (*stack)->next;
-	sum = (*stack)->n / (*stack)->prev->n;
-	(*stack)->n = sum;
+	result = (*stack)->n / (*stack)->prev->n;
+	(*stack)->n = result;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
 }
