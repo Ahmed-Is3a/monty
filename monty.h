@@ -57,6 +57,7 @@ void nop(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
 void swap(stack_t **, unsigned int);
 void sub(stack_t **stack, unsigned int line_number);
+void divide(stack_t **stack, unsigned int line_num);
 
 void call_func(op_func, char *, char *, int);
 
