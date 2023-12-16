@@ -19,6 +19,7 @@ void find_func(char *opcode, char *value, int ln)
 		{"nop", nop},
 		{"swap", swap},
 		{"add", add},
+		{"sub", sub},
 		{NULL, NULL}};
 
 	if (opcode[0] == '#')
@@ -34,6 +35,26 @@ void find_func(char *opcode, char *value, int ln)
 	}
 	if (flag == 1)
 		handle_errors(2, ln, opcode);
+}
+
+
+/**
+ * add_to_stack - Creates a node.
+ * @n: Number to be added to stack
+ * Return: a pointer to the node.
+ */
+stack_t *add_to_stack(int n)
+{
+	stack_t *node;
+
+	node = malloc(sizeof(stack_t));
+	if (node == NULL)
+		fprintf(stderr, "Error: malloc failed\n");
+
+	node->next = NULL;
+	node->prev = NULL;
+	node->n = n;
+	return (node);
 }
 
 /**
@@ -69,23 +90,4 @@ void call_func(op_func func, char *op, char *value, int ln)
 	}
 	else
 		func(&head, ln);
-}
-
-/**
- * add_to_stack - Creates a node.
- * @n: Number to be added to stack
- * Return: a pointer to the node.
- */
-stack_t *add_to_stack(int n)
-{
-	stack_t *node;
-
-	node = malloc(sizeof(stack_t));
-	if (node == NULL)
-		fprintf(stderr, "Error: malloc failed\n");
-
-	node->next = NULL;
-	node->prev = NULL;
-	node->n = n;
-	return (node);
 }
