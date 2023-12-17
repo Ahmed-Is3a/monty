@@ -62,6 +62,7 @@ void multiply(stack_t **stack, unsigned int line_num);
 void mod(stack_t **stack, unsigned int line_number);
 void print_char(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_num);
+void rotl(stack_t **stack, unsigned int line_num);
 
 void call_func(op_func, char *, char *, int);
 
