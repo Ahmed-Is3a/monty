@@ -49,13 +49,13 @@ void find_func(char *, char *, int);
 
 stack_t *add_to_stack(int n);
 void free_stack(void);
-void push(stack_t **, unsigned int);
-void pall(stack_t **, unsigned int);
-void pint(stack_t **, unsigned int);
-void add(stack_t **, unsigned int);
-void nop(stack_t **, unsigned int);
-void pop(stack_t **, unsigned int);
-void swap(stack_t **, unsigned int);
+void push(stack_t **stack, unsigned int);
+void pall(stack_t **stack, unsigned int);
+void pint(stack_t **stack, unsigned int);
+void add(stack_t **stack, unsigned int);
+void nop(stack_t **stack, unsigned int);
+void pop(stack_t **stack, unsigned int);
+void swap(stack_t **stack, unsigned int);
 void sub(stack_t **stack, unsigned int line_number);
 void divide(stack_t **stack, unsigned int line_num);
 void multiply(stack_t **stack, unsigned int line_num);
@@ -63,6 +63,7 @@ void mod(stack_t **stack, unsigned int line_number);
 void print_char(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_num);
 void rotl(stack_t **stack, unsigned int line_num);
+void rotr(stack_t **stack, unsigned int line_num);
 
 void call_func(op_func, char *, char *, int);
 
