@@ -24,6 +24,7 @@ void find_func(char *opcode, char *value, int ln)
 		{"mul", multiply},
 		{"mod", mod},
 		{"pchar", print_char},
+		{"pstr", pstr},
 		{NULL, NULL}};
 
 	if (opcode[0] == '#')
