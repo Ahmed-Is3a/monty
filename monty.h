@@ -65,6 +65,7 @@ void pstr(stack_t **stack, unsigned int line_num);
 void rotl(stack_t **stack, unsigned int line_num);
 void rotr(stack_t **stack, unsigned int line_num);
 
+
 void call_func(op_func, char *, char *, int);
 
 /*Error hanlding*/
